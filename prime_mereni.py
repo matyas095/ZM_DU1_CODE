@@ -1,6 +1,7 @@
 import json, math;
-from pathlib import Path
+from pathlib import Path;
 import numpy as np;
+import matplotlib.pyplot as plt;
 
 ABSOLUTE_PATH = Path(__file__).parent.resolve();
 
@@ -48,7 +49,6 @@ def stredni_kvadraticka_chyba(arr, prumer):
     for i in range(0, len(arr)):
         hodnota_s += (arr[i] - prumer) ** 2;
     return math.sqrt(hodnota_s / (len(arr) * (len(arr) - 1)));
-    return "{:.1f}".format(math.sqrt(hodnota_s / (len(arr) * (len(arr) - 1))));
 
 stredni_chyba_kvadraticka = stredni_kvadraticka_chyba(hodnoty, prumer);
 # prumer = "{:.1f}".format(prumer);
@@ -63,7 +63,15 @@ data = {
 
 for i in range(0, len(hodnoty)):
     odchylka = data["prumer"] - hodnoty[i];
-    data["odchylky"].append(odchylka)
+    data["odchylky"].append(odchylka);
 
 with open(findFile("output.json"), "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4);
+
+plt.hist(hodnoty, bins=6, edgecolor="black");
+plt.xlabel("Proud [mA]");
+plt.ylabel("Četnost měření");
+plt.title("Histogram měření");
+plt.grid(axis="y", alpha=0.3);
+plt.savefig("storager/histogram.png");
+plt.show();
