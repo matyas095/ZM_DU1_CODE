@@ -1,6 +1,8 @@
 import json, math;
 from pathlib import Path;
 import numpy as np;
+
+from matplotlib.ticker import MultipleLocator
 import matplotlib.pyplot as plt;
 
 ABSOLUTE_PATH = Path(__file__).parent.resolve();
@@ -28,6 +30,20 @@ with open(findFile("input.json")) as f:
     jThingys = json.load(f);
     hodnoty = jThingys["hodnoty"];
     velicina = jThingys["velicina"]; # Čísla ze kterých mám hodnoty měření
+
+bins = np.arange(np.floor(min(hodnoty)), np.ceil(max(hodnoty)) + 1, 1)
+
+plt.hist(hodnoty, bins=bins, edgecolor="black", density=False)
+plt.xlabel("Proud [mA]")
+plt.ylabel("Četnost měření")
+plt.title("Histogram měření")
+plt.grid(axis="y", alpha=0.3)
+
+# popisky osy X jen pro celá čísla
+plt.gca().xaxis.set_major_locator(MultipleLocator(1))
+
+plt.savefig("storager/histogram.png");
+plt.show();
 
 def aritmetr_prumer(arr):
     prumer = 0;
@@ -67,11 +83,3 @@ for i in range(0, len(hodnoty)):
 
 with open(findFile("output.json"), "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4);
-
-plt.hist(hodnoty, bins=6, edgecolor="black");
-plt.xlabel("Proud [mA]");
-plt.ylabel("Četnost měření");
-plt.title("Histogram měření");
-plt.grid(axis="y", alpha=0.3);
-plt.savefig("storager/histogram.png");
-plt.show();
