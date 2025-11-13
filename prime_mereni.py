@@ -38,11 +38,8 @@ plt.xlabel("Proud [mA]")
 plt.ylabel("Četnost měření")
 plt.title("Histogram měření")
 plt.grid(axis="y", alpha=0.3)
-
-# popisky osy X jen pro celá čísla
 plt.gca().xaxis.set_major_locator(MultipleLocator(1))
-
-plt.savefig("storager/histogram.png");
+plt.savefig("storager/old_timers/histogram.png");
 plt.show();
 
 def aritmetr_prumer(arr):
