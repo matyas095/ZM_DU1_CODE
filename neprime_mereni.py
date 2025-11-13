@@ -42,7 +42,7 @@ for obj in hodnoty:
         plt.figure(figsize=(8,4));
         plt.hist(values, bins=bins, edgecolor='black');
         plt.title("Histogram měření");
-        plt.xlabel("Hodnoty [mm]");
+        plt.xlabel("Hmotnost [mm]");
         plt.ylabel("Četnost měření");
         plt.xticks(np.arange(bins[0], bins[-1] + 1, 1));
         plt.grid(axis="y", alpha=0.3);
@@ -103,17 +103,13 @@ for obj in hodnoty:
 def vypocetObjemu(a, h):
     return math.sqrt(3) / 12 * (a ** 2) * h;
 
-def vypocetChybyObjemu():
-    return math.sqrt((2 * sigma_a / a) ** 2 + (si));
-
 data = {
     "prumer": prumery,
     "odchylky": [],
     "stredni_kvadraticka_chyba": chyby_stredni,
     "chyba_aritmetickeho_prumeru": chyby_aritmetru,
 
-    "objem_V": vypocetObjemu(prumery["Strana A"]["aritmetr"], prumery["Výška"]["aritmetr"]),
-    "chyba_objemu": vypocetChybyObjemu(prumery["Strana A"]["aritmetr"], prumery["Výška"]["aritmetr"]),
+    "objem_V": vypocetObjemu(prumery["Strana A"]["aritmetr"], prumery["Výška"]["aritmetr"])
 };
 with open(findFile("output.json"), "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4);
