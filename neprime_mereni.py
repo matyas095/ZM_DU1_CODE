@@ -100,12 +100,20 @@ for obj in hodnoty:
 
     chyby_aritmetru[nameThingy] = rounding(chyba_aritmetreho_prumeru(val["hodnoty"], chyby_stredni[nameThingy]));
 
+def vypocetObjemu(a, h):
+    return math.sqrt(3) / 12 * (a ** 2) * h;
+
+def vypocetChybyObjemu():
+    return math.sqrt((2 * sigma_a / a) ** 2 + (si));
 
 data = {
     "prumer": prumery,
     "odchylky": [],
     "stredni_kvadraticka_chyba": chyby_stredni,
     "chyba_aritmetickeho_prumeru": chyby_aritmetru,
+
+    "objem_V": vypocetObjemu(prumery["Strana A"]["aritmetr"], prumery["Výška"]["aritmetr"]),
+    "chyba_objemu": vypocetChybyObjemu(prumery["Strana A"]["aritmetr"], prumery["Výška"]["aritmetr"]),
 };
 with open(findFile("output.json"), "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4);

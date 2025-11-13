@@ -5,7 +5,7 @@
             "velicina": "mm"
         },
         "Výška": {
-            "aritmetr": 59.1,
+            "aritmetr": 59.07,
             "velicina": "mm"
         },
         "Váha": {
@@ -23,5 +23,6 @@
         "Strana A": 0.3,
         "Výška": 0.4,
         "Váha": 2.6
-    }
+    },
+    "objem_V": 18198.3
 }
